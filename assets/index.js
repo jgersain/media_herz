@@ -6,17 +6,19 @@ function MediaPlayer(config) {
 }
 
 MediaPlayer.prototype.play = function () {
-  video.play();
+  this.media.play();
 };
 
 MediaPlayer.prototype.pause = function () {
-  video.pause();
+  this.media.pause();
 };
 
-MediaPlayer.prototype.paused = video.paused;
+MediaPlayer.prototype.toggleMedia = function () {
+  this.media.paused ? this.media.play() : this.media.pause();
+};
 
 const player = new MediaPlayer({
   el: video,
 });
 
-button.onclick = () => (video.paused ? player.play() : player.pause());
+button.onclick = () => player.toggleMedia();
