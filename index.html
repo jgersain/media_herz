@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,10 +21,31 @@
       <source src="./assets/video.mp4" />
     </video>
 
-    <button>Play/Pause</button>
+    <button id="control-play">Play/Pause</button>
+    <button id="control-mute">Mute/Unmuted</button>
   </main>
-  <script type="module" src="./assets/index.js"></script>
-  <script src="./assets/closures.js"></script>
+  <script>
+    const video = document.querySelector('video');
+    const buttonPlay = document.querySelector('#control-play');
+    const buttonMute = document.querySelector('#control-mute');
+
+    function MediaPlayer (config) {
+      this.media = config.el;
+    }
+
+    MediaPlayer.prototype.play = function () {
+      this.media.play()
+    }
+
+    MediaPlayer.prototype.mute = function () {
+      this.media.pause()
+    }
+
+    const player = new MediaPlayer({ el: video })
+
+    buttonPlay.onclick = () => player.play();
+    buttonMute.onclick = () => player.mute();
+  </script>
 </body>
 
 </html>
